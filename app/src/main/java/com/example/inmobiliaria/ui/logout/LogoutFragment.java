@@ -19,7 +19,6 @@ import com.example.inmobiliaria.servicios.TokenService;
 import com.example.inmobiliaria.util.Dialogo;
 
 public class LogoutFragment extends Fragment {
-    private TokenService tokenService;
     private FragmentLogoutBinding binding;
 
     @Override
@@ -28,12 +27,10 @@ public class LogoutFragment extends Fragment {
                              @Nullable Bundle savedInstanceState)
     {
         binding = FragmentLogoutBinding.inflate(inflater, container, false);
-        tokenService = TokenService.getInstancia(getActivity().getApplication());
 
         Dialogo dialogo = new Dialogo(getContext(), getLayoutInflater());
         dialogo.mostrarPregunta(getString(R.string.pregunta_dialog_salir), (dialogInterface, i) -> {
-//            ApiClient.borrarToken(getContext());
-            tokenService.borrarToken();
+            TokenService.getInstancia(getActivity().getApplication()).borrarToken();
             Intent intent = new Intent(getContext(), LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
