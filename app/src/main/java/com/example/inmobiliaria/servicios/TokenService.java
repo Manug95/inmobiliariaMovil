@@ -8,8 +8,8 @@ import com.example.inmobiliaria.BuildConfig;
 
 public class TokenService {
     private static TokenService instancia;
-    private static SharedPreferences sharedPreferences;
-    private static SharedPreferences.Editor editor;
+    private final SharedPreferences sharedPreferences;
+    private final SharedPreferences.Editor editor;
 
     private TokenService(Application context) {
         sharedPreferences = context.getApplicationContext().getSharedPreferences(BuildConfig.ARCHIVO_SHARED_PREFERENCES, Context.MODE_PRIVATE);

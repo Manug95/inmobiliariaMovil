@@ -1,5 +1,7 @@
 package com.example.inmobiliaria.modelos;
 
+import com.example.inmobiliaria.util.TipoErrorValidacion;
+
 import java.util.Objects;
 
 public class Propietario extends Login {
@@ -95,5 +97,62 @@ public class Propietario extends Login {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    /**
+     * Valida el nombre ingresado
+     * @param nombre Nombre a validar
+     * @return TipoErrorValidacion: OK si el nombre es válido, VACIO si el nombre está vacío, LONGITUD_MAXIMA si el nombre es muy largo
+     */
+    public static TipoErrorValidacion validarNombre(String nombre){
+        if (nombre == null || nombre.isEmpty())
+            return TipoErrorValidacion.VACIO;
+        if (nombre.length() > 50)
+            return TipoErrorValidacion.LONGITUD_MAXIMA;
+        return TipoErrorValidacion.OK;
+    }
+
+    /**
+     * Valida el apellido ingresado
+     * @param apellido Apellido a validar
+     * @return TipoErrorValidacion: OK si el apellido es válido, VACIO si el apellido está vacío, LONGITUD_MAXIMA si el apellido es muy largo
+     */
+    public static TipoErrorValidacion validarApellido(String apellido){
+        if (apellido == null || apellido.isEmpty())
+            return TipoErrorValidacion.VACIO;
+        if (apellido.length() > 50)
+            return TipoErrorValidacion.LONGITUD_MAXIMA;
+        return TipoErrorValidacion.OK;
+    }
+
+    /**
+     * Valida el DNI ingresado
+     * @param dni DNI a validar
+     * @return TipoErrorValidacion: OK si el DNI es válido, VACIO si el DNI está vacío, NO_ES_NUMERO si el DNI no es un número, LONGITUD_INCORRECTA si el DNI tiene una longitud incorrecta
+     */
+    public static TipoErrorValidacion validarDni(String dni){
+        if (dni == null || dni.isEmpty())
+            return TipoErrorValidacion.VACIO;
+        try {
+            Integer.parseInt(dni);
+        } catch (NumberFormatException e) {
+            return TipoErrorValidacion.NO_ES_NUMERO;
+        }
+        if (dni.length() < 7 || dni.length() > 8)
+            return TipoErrorValidacion.LONGITUD_INCORRECTA;
+        return TipoErrorValidacion.OK;
+    }
+
+    /**
+     * Valida el teléfono ingresado
+     * @param telefono Teléfono a validar
+     * @return TipoErrorValidacion: OK si el teléfono es válido, VACIO si el teléfono está vacío, LONGITUD_MAXIMA si el teléfono es muy largo
+     */
+    public static TipoErrorValidacion validarTelefono(String telefono){
+        if (telefono == null || telefono.isEmpty())
+            return TipoErrorValidacion.VACIO;
+        if (telefono.length() > 25)
+            return TipoErrorValidacion.LONGITUD_MAXIMA;
+        return TipoErrorValidacion.OK;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.inmobiliaria.request;
 
 import com.example.inmobiliaria.BuildConfig;
+import com.example.inmobiliaria.modelos.CambioContrasenia;
 import com.example.inmobiliaria.modelos.Login;
 import com.example.inmobiliaria.modelos.Propietario;
 import com.example.inmobiliaria.util.LocalDateAdapter;
@@ -19,7 +20,9 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public class ApiClient {
     public static InmobiliariaService getInmobiliariaService() {
@@ -39,8 +42,14 @@ public class ApiClient {
         @POST("Propietario/login")
         Call<String> login(@Body Login login);
 
+        @PATCH("Propietario/clave")
+        Call<Void> cambiarContrasenia(@Header("Authorization") String token, @Body CambioContrasenia cambiarContrasenia);
+
         @GET("Propietario")
         Call<Propietario> getPropietario(@Header("Authorization") String token);
+
+        @PUT("Propietario")
+        Call<Propietario> putPropietario(@Header("Authorization") String token, @Body Propietario propietario);
     }
 
     public static String obtenerMensajeError(ResponseBody responseBody) {

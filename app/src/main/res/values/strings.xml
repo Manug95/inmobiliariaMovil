@@ -29,6 +29,7 @@
     <string name="dialog_ok">OK</string>
     <string name="titulo_dialog_mensaje">Mensaje</string>
     <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
     <string name="editar">Editar</string>
     <string name="cambiar">Cambiar</string>
     <string name="detalle">Detalle</string>
@@ -57,7 +58,39 @@
     <string name="menu_logout">Salir</string>
     <string name="menu_login">Iniciar Sesión</string>
 
-    <!--Propietario-->
+    <!--Perfil-->
+    <string name="tv_titulo_perfil">Mis Datos</string>
+    <string name="tv_nombre">Nombre</string>
+    <string name="tv_apellido">Apellido</string>
+    <string name="tv_dni">DNI</string>
+    <string name="tv_telefono">Teléfono</string>
+    <string name="tv_email">E-mail</string>
+    <string name="et_hint_nombre">nombre</string>
+    <string name="et_hint_apellido">apellido</string>
+    <string name="et_hint_dni">DNI</string>
+    <string name="et_hint_telefono">teléfono</string>
+    <string name="cambiar_contrasenia">Cambiar Contraseña</string>
+    <string name="contrasenia_actual">Contraseña Actual</string>
+    <string name="nueva_contrasenia">Nueva Contraseña</string>
+    <string name="repetir_nueva_contrasenia">Repita la Nueva Contraseña</string>
+    <string name="cambiar_la_contrasenia">Cambiar la Contraseña</string>
+    <string name="perfil_actualizado">Perfil Actualizado</string>
+    <string name="err_al_obtener_perfil">Error al obtener el perfil</string>
+    <string name="err_al_actualizar_perfil">Error al actualizar el perfil</string>
     <string name="err_al_obtener_propietario">Error al obtener el propietario</string>
+    <string name="err_val_nombre_vacio">El nombre no puede estar vacío</string>
+    <string name="err_val_nombre_muy_largo">El nombre no puede tener más de 50 caracteres</string>
+    <string name="err_val_apellido_vacio">El apellido no puede estar vacío</string>
+    <string name="err_val_apellido_muy_largo">El apellido no puede tener más de 50 caracteres</string>
+    <string name="err_val_dni_vacio">El DNI no puede estar vacío</string>
+    <string name="err_val_dni_no_es_numero">El DNI debe ser un número</string>
+    <string name="err_val_dni_formato_incorrecto">El DNI debe tener 7 u 8 caracteres numéricos</string>
+    <string name="err_val_telefono_vacio">El teléfono no puede estar vacío</string>
+    <string name="err_val_telefono_muy_largo">El teléfono no puede tener más de 25 caracteres</string>
+    <string name="err_val_clave_actual_vacia">La clave actual no puede estar vacía</string>
+    <string name="err_val_clave_nueva_vacia">La clave nueva no puede estar vacía</string>
+    <string name="err_val_clave_no_coiciden">Las claves no coinciden</string>
+    <string name="err_al_cambiar_contrasenia">Error al cambiar la contraseña</string>
+    <string name="contrasenia_actualizada">Contraseña Actualizada</string>
 
 </resources>

@@ -14,7 +14,11 @@
         android:id="@+id/nav_perfil"
         android:name="com.example.inmobiliaria.ui.perfil.PerfilFragment"
         android:label="@string/menu_perfil"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_nav_perfil_to_cambiarContraseniaFragment"
+            app:destination="@id/cambiarContraseniaFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_contrato"
         android:name="com.example.inmobiliaria.ui.contrato.ContratoFragment"
@@ -35,4 +39,13 @@
         android:name="com.example.inmobiliaria.ui.logout.LogoutFragment"
         android:label="@string/menu_logout"
         tools:layout="@layout/fragment_logout" />
+    <fragment
+        android:id="@+id/cambiarContraseniaFragment"
+        android:name="com.example.inmobiliaria.ui.perfil.CambiarContraseniaFragment"
+        android:label="@string/cambiar_contrasenia"
+        tools:layout="@layout/fragment_cambiar_contrasenia" >
+        <action
+            android:id="@+id/action_cambiarContraseniaFragment_to_nav_perfil"
+            app:destination="@id/nav_perfil" />
+    </fragment>
 </navigation>
