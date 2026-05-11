@@ -1,10 +1,16 @@
 package com.example.inmobiliaria;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
 
 import com.example.inmobiliaria.databinding.NavHeaderMainBinding;
+import com.example.inmobiliaria.modelos.DatosUsuario;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -19,23 +25,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.inmobiliaria.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    private MainActivityViewModel viewModel;
+    private ActivityMainBinding binding;
+    private NavHeaderMainBinding navHeaderMainBinding;
+    private NavHeaderMainViewModel navHeaderMainViewModel;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        assert binding.navView != null;
+        navHeaderMainBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0));
+        navHeaderMainViewModel = new ViewModelProvider(this).get(NavHeaderMainViewModel.class);
 
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainActivityViewModel.class);
-
-        viewModel.getmDatosUsuario().observe(this, datosUsuario -> {
-            assert binding.navView != null;
-            NavHeaderMainBinding navHeaderMainBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0));
-            navHeaderMainBinding.tvHeaderUsuario.setText(datosUsuario.getNombre());
-            navHeaderMainBinding.tvHeaderEmail.setText(datosUsuario.getEmail());
+        navHeaderMainViewModel.getmDatosUsuario().observe(this, datosUsuario -> {
+            setDatosEnNavHeader(datosUsuario);
         });
 
         setSupportActionBar(binding.appBarMain.toolbar);
@@ -60,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
             NavigationUI.setupWithNavController(navigationView, navController);
         }
 
-        viewModel.traerPropietario();
+        navHeaderMainViewModel.traerPropietario();
+        solicitarPermisos();
     }
 
     @Override
@@ -91,5 +98,19 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private void solicitarPermisos(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                ((checkSelfPermission(ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) ||
+                        (checkSelfPermission(ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)))
+        {
+            requestPermissions(new String[]{ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION},1000);
+        }
+    }
+
+    private void setDatosEnNavHeader(DatosUsuario datosUsuario) {
+        navHeaderMainBinding.tvHeaderUsuario.setText(datosUsuario.getNombre());
+        navHeaderMainBinding.tvHeaderEmail.setText(datosUsuario.getEmail());
     }
 }

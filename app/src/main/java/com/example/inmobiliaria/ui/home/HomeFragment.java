@@ -12,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.inmobiliaria.R;
 import com.example.inmobiliaria.databinding.FragmentHomeBinding;
+import com.google.android.gms.maps.SupportMapFragment;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
@@ -26,9 +28,19 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
+        viewModel.getMutableMapaActual().observe(getViewLifecycleOwner(), mapaActual -> {
+            ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapa))
+                    .getMapAsync(mapaActual);
+        });
 
+        viewModel.cargarMapa();
 
         return binding.getRoot();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

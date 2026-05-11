@@ -13,13 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.inmobiliaria.NavHeaderMainViewModel;
 import com.example.inmobiliaria.R;
 import com.example.inmobiliaria.databinding.FragmentPerfilBinding;
+import com.example.inmobiliaria.databinding.NavHeaderMainBinding;
+import com.example.inmobiliaria.modelos.DatosUsuario;
 import com.example.inmobiliaria.util.Dialogo;
 
 public class PerfilFragment extends Fragment {
     private FragmentPerfilBinding binding;
     private PerfilViewModel viewModel;
+    private NavHeaderMainViewModel navHeaderMainViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -54,6 +58,9 @@ public class PerfilFragment extends Fragment {
             if (mensaje != null) {
                 setBotonCancelarVisible(false);
                 muestraDialog(mensaje, true);
+                navHeaderMainViewModel = new ViewModelProvider(requireActivity()).get(NavHeaderMainViewModel.class);
+                String nombreCompleto = binding.etNombre.getText().toString() + " " + binding.etApellido.getText().toString();
+                navHeaderMainViewModel.actualizarDatosUsuario(new DatosUsuario(nombreCompleto, binding.etEmail.getText().toString()));
             }
         });
 
@@ -101,6 +108,7 @@ public class PerfilFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        navHeaderMainViewModel = null;
     }
 
     private void muestraDialog(String mensaje, boolean exito){
@@ -119,5 +127,11 @@ public class PerfilFragment extends Fragment {
     private void setBotonCancelarVisible(boolean visible) {
         binding.btnCancelarEdicionPerfil.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
     }
+
+//    private void actualizarDatosNavHeader(DatosUsuario datosUsuario) {
+//        NavHeaderMainBinding navHeaderMainBinding = NavHeaderMainBinding.bind(findViewById(R.id.nav_view).getHeaderView(0));
+//        navHeaderMainBinding.tvHeaderUsuario.setText(datosUsuario.getNombre());
+//        navHeaderMainBinding.tvHeaderEmail.setText(datosUsuario.getEmail());
+//    }
 
 }

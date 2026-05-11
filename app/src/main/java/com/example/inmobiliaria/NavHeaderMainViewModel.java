@@ -17,18 +17,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivityViewModel extends AndroidViewModel {
+public class NavHeaderMainViewModel extends AndroidViewModel {
     private final TokenService tokenService;
-    public MutableLiveData<DatosUsuario> mDatosUsuario;
+    private final MutableLiveData<DatosUsuario> mDatosUsuario;
 
-    public MainActivityViewModel(@NonNull Application application) {
+    public NavHeaderMainViewModel(@NonNull Application application) {
         super(application);
-        this.tokenService = TokenService.getInstancia(application);
+        tokenService = TokenService.getInstancia(application);
         mDatosUsuario = new MutableLiveData<>();
     }
 
     public LiveData<DatosUsuario> getmDatosUsuario() {
         return mDatosUsuario;
+    }
+
+    public void actualizarDatosUsuario(DatosUsuario datosUsuario) {
+        mDatosUsuario.setValue(datosUsuario);
     }
 
     public void traerPropietario() {
