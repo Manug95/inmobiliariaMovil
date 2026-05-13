@@ -19,6 +19,7 @@ import retrofit2.Response;
 
 public class PerfilViewModel extends AndroidViewModel {
     private final TokenService tokenService;
+    private Propietario propietario;
     private final String EDITAR;
     private final String GUARDAR;
     private final MutableLiveData<Propietario> mPropietario;
@@ -28,9 +29,8 @@ public class PerfilViewModel extends AndroidViewModel {
             mErrorNombre,
             mErrorApellido,
             mErrorEmail,
-            mErrorTelefono,
-            mMensajeError;
-    private final MutableLiveData<MutableSingleEvent<String>> mPerfilActualizado;
+            mErrorTelefono;
+    private final MutableLiveData<MutableSingleEvent<String>> mPerfilActualizado, mMensajeError;
 
     public PerfilViewModel(@NonNull Application application) {
         super(application);
@@ -52,36 +52,28 @@ public class PerfilViewModel extends AndroidViewModel {
     public LiveData<String> getMErrorDni() {
         return mErrorDni;
     }
-
     public LiveData<Propietario> getMPropietario() {
         return mPropietario;
     }
-
     public LiveData<Boolean> getMEstadoEditar() {
         return mEstadoEditar;
     }
-
     public LiveData<String> getMTextoBoton() {
         return mTextoBoton;
     }
-
     public LiveData<String> getMErrorNombre() {
         return mErrorNombre;
     }
-
     public LiveData<String> getMErrorApellido() {
         return mErrorApellido;
     }
-
     public LiveData<String> getMErrorEmail() {
         return mErrorEmail;
     }
-
     public LiveData<String> getMErrorTelefono() {
         return mErrorTelefono;
     }
-
-    public LiveData<String> getMMensajeError() {
+    public LiveData<MutableSingleEvent<String>> getMMensajeError() {
         return mMensajeError;
     }
     public LiveData<MutableSingleEvent<String>> getMPerfilActualizado() {
@@ -101,54 +93,69 @@ public class PerfilViewModel extends AndroidViewModel {
     }
 
     public void obtenerPropietario() {
-        ApiClient.InmobiliariaService api = ApiClient.getInmobiliariaService();
-        Call<Propietario> apiCall = api.getPropietario(tokenService.leerToken());
+        if (propietario == null) {
+            ApiClient.InmobiliariaService api = ApiClient.getInmobiliariaService();
+            Call<Propietario> apiCall = api.getPropietario(tokenService.leerToken());
 
-        apiCall.enqueue(new Callback<>() {
-            @Override
-            public void onResponse(@NonNull Call<Propietario> call, @NonNull Response<Propietario> response) {
-                if (response.isSuccessful()) {
-                    Propietario propietario = response.body();
-                    if (propietario != null) {
-                        mPropietario.postValue(propietario);
+            apiCall.enqueue(new Callback<>() {
+                @Override
+                public void onResponse(@NonNull Call<Propietario> call, @NonNull Response<Propietario> response) {
+                    if (response.isSuccessful()) {
+                        propietario = response.body();
+                        if (propietario != null) {
+                            mPropietario.postValue(propietario);
+                        } else {
+                            mMensajeError.postValue(new MutableSingleEvent<>(getApplication().getString(R.string.no_se_pudo_obtener_el_perfil)));
+                        }
+                    } else {
+                        mMensajeError.postValue(new MutableSingleEvent<>(ApiClient.obtenerMensajeError(response.errorBody())));
                     }
-                } else {
-                    mMensajeError.postValue(ApiClient.obtenerMensajeError(response.errorBody()));
                 }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<Propietario> call, @NonNull Throwable t) {
-                mMensajeError.postValue(getApplication().getString(R.string.err_al_obtener_perfil));
-            }
-        });
+                @Override
+                public void onFailure(@NonNull Call<Propietario> call, @NonNull Throwable t) {
+                    mMensajeError.postValue(new MutableSingleEvent<>(getApplication().getString(R.string.err_al_obtener_perfil)));
+                }
+            });
+        } else {
+            mPropietario.setValue(propietario);
+        }
     }
 
-    private void actualizarPropietario(Propietario propietario) {
+    private void actualizarPropietario(Propietario propietarioActualizado) {
         ApiClient.InmobiliariaService api = ApiClient.getInmobiliariaService();
 
-        Call<Propietario> apiCall = api.putPropietario(tokenService.leerToken(), propietario);
+        Call<Propietario> apiCall = api.putPropietario(tokenService.leerToken(), propietarioActualizado);
 
         apiCall.enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<Propietario> call, @NonNull Response<Propietario> response) {
                 if (response.isSuccessful()) {
-                    mPropietario.postValue(response.body());
+                    propietario = response.body();
+                    mPropietario.postValue(propietario);
                     mPerfilActualizado.postValue(new MutableSingleEvent<>(getApplication().getString(R.string.perfil_actualizado)));
                 } else {
-                    mMensajeError.postValue(ApiClient.obtenerMensajeError(response.errorBody()));
+                    mMensajeError.postValue(new MutableSingleEvent<>(ApiClient.obtenerMensajeError(response.errorBody())));
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Propietario> call, @NonNull Throwable t) {
-                mMensajeError.postValue(getApplication().getString(R.string.err_al_actualizar_perfil));
+                mMensajeError.postValue(new MutableSingleEvent<>(getApplication().getString(R.string.err_al_actualizar_perfil)));
             }
         });
     }
 
     public void resetearDatosPropietario() {
         mPropietario.setValue(mPropietario.getValue());
+    }
+
+    public void resetearMensajesError() {
+        mErrorDni.setValue("");
+        mErrorNombre.setValue("");
+        mErrorApellido.setValue("");
+        mErrorTelefono.setValue("");
+        mErrorEmail.setValue("");
     }
 
     public void cambiarAEditar() {

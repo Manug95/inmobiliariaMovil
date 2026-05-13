@@ -4,45 +4,29 @@ import com.example.inmobiliaria.util.TipoErrorValidacion;
 
 import java.util.Objects;
 
-public class Propietario extends Login {
+public class Propietario {
     private int id;
     private String nombre;
     private String apellido;
+    private String email;
     private String dni;
     private String telefono;
 
     public Propietario() { }
 
     public Propietario(int id, String nombre, String apellido, String dni, String telefono, String email) {
-        super(email, null);
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.email = email;
         this.dni = dni;
         this.telefono = telefono;
     }
 
     public Propietario(String nombre, String apellido, String dni, String telefono, String email) {
-        super(email, null);
         this.nombre = nombre;
         this.apellido = apellido;
-        this.dni = dni;
-        this.telefono = telefono;
-    }
-
-    public Propietario(String nombre, String apellido, String dni, String telefono, String email, String clave) {
-        super(email, clave);
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.telefono = telefono;
-    }
-
-    public Propietario(int id, String nombre, String apellido, String dni, String telefono, String email, String clave) {
-        super(email, clave);
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
+        this.email = email;
         this.dni = dni;
         this.telefono = telefono;
     }
@@ -69,6 +53,14 @@ public class Propietario extends Login {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDni() {
@@ -152,6 +144,19 @@ public class Propietario extends Login {
         if (telefono == null || telefono.isEmpty())
             return TipoErrorValidacion.VACIO;
         if (telefono.length() > 25)
+            return TipoErrorValidacion.LONGITUD_MAXIMA;
+        return TipoErrorValidacion.OK;
+    }
+
+    /**
+     * Valida el email ingresado
+     * @param email Email a validar
+     * @return TipoErrorValidacion: OK si el email es válido, VACIO si el email está vacío, LONGITUD_MAXIMA si el email es muy largo
+     */
+    public static TipoErrorValidacion validarEmail(String email){
+        if (email == null || email.isEmpty())
+            return TipoErrorValidacion.VACIO;
+        if (email.length() > 100)
             return TipoErrorValidacion.LONGITUD_MAXIMA;
         return TipoErrorValidacion.OK;
     }

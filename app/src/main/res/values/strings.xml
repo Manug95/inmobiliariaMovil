@@ -75,6 +75,7 @@
     <string name="repetir_nueva_contrasenia">Repita la Nueva Contraseña</string>
     <string name="cambiar_la_contrasenia">Cambiar la Contraseña</string>
     <string name="perfil_actualizado">Perfil Actualizado</string>
+    <string name="no_se_pudo_obtener_el_perfil">No se pudo obtener el perfil.</string>
     <string name="err_al_obtener_perfil">Error al obtener el perfil</string>
     <string name="err_al_actualizar_perfil">Error al actualizar el perfil</string>
     <string name="err_al_obtener_propietario">Error al obtener el propietario</string>

@@ -1,5 +1,6 @@
 package com.example.inmobiliaria.ui.perfil;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class PerfilFragment extends Fragment {
             binding.etDni.setText(propietario.getDni());
             binding.etTelefono.setText(propietario.getTelefono());
             binding.etEmail.setText(propietario.getEmail());
+            binding.btnAccion.setEnabled(true);
         });
 
         viewModel.getMEstadoEditar().observe(getViewLifecycleOwner(), aBoolean -> {
@@ -51,8 +53,12 @@ public class PerfilFragment extends Fragment {
 
         viewModel.getMTextoBoton().observe(getViewLifecycleOwner(), s -> binding.btnAccion.setText(s));
 
-        viewModel.getMMensajeError().observe(getViewLifecycleOwner(), s -> muestraDialog(s, false));
-
+        /*
+            ESTOS IF LOS PUSE PORQUE
+            AL ACTUALIZAR EL PERFIL DE PROPIETARIO, MUESTRO UN DIALOGO
+            Y SI NAVEGO A OTRO FRAGMENT Y LUEGO VUELVO A ESTE, ME VUELVE A APARECER EL DIALOGO AL CARGARSE EL FRAGMENT.
+            FUE LA SOLUCION QUE ENCONTRE
+        */
         viewModel.getMPerfilActualizado().observe(getViewLifecycleOwner(), event -> {
             String mensaje = event.getContenido();
             if (mensaje != null) {
@@ -61,6 +67,13 @@ public class PerfilFragment extends Fragment {
                 navHeaderMainViewModel = new ViewModelProvider(requireActivity()).get(NavHeaderMainViewModel.class);
                 String nombreCompleto = binding.etNombre.getText().toString() + " " + binding.etApellido.getText().toString();
                 navHeaderMainViewModel.actualizarDatosUsuario(new DatosUsuario(nombreCompleto, binding.etEmail.getText().toString()));
+            }
+        });
+
+        viewModel.getMMensajeError().observe(getViewLifecycleOwner(), event -> {
+            String mensaje = event.getContenido();
+            if (mensaje != null) {
+                muestraDialog(mensaje, false);
             }
         });
 
@@ -75,7 +88,7 @@ public class PerfilFragment extends Fragment {
         viewModel.getMErrorEmail().observe(getViewLifecycleOwner(), s -> binding.tvErrorEmail.setText(s));
 
         binding.btnAccion.setOnClickListener(v -> {
-            resetearMensajesError();
+            viewModel.resetearMensajesError();
 
             String nombre = binding.etNombre.getText().toString();
             String apellido = binding.etApellido.getText().toString();
@@ -90,6 +103,7 @@ public class PerfilFragment extends Fragment {
 
         binding.btnCancelarEdicionPerfil.setOnClickListener( v -> {
             setBotonCancelarVisible(false);
+            viewModel.resetearMensajesError();
             viewModel.cambiarAEditar();
             viewModel.resetearDatosPropietario();
         });
@@ -100,6 +114,7 @@ public class PerfilFragment extends Fragment {
         );
 
         viewModel.obtenerPropietario();
+        binding.btnAccion.setEnabled(false);
 
         return binding.getRoot();
     }
@@ -116,13 +131,13 @@ public class PerfilFragment extends Fragment {
         dialogo.mostrarMensaje(mensaje, null, exito);
     }
 
-    private void resetearMensajesError() {
-        binding.tvErrorDni.setText("");
-        binding.tvErrorNombre.setText("");
-        binding.tvErrorApellido.setText("");
-        binding.tvErrorTelefono.setText("");
-        binding.tvErrorEmail.setText("");
-    }
+//    private void resetearMensajesError() {
+//        binding.tvErrorDni.setText("");
+//        binding.tvErrorNombre.setText("");
+//        binding.tvErrorApellido.setText("");
+//        binding.tvErrorTelefono.setText("");
+//        binding.tvErrorEmail.setText("");
+//    }
 
     private void setBotonCancelarVisible(boolean visible) {
         binding.btnCancelarEdicionPerfil.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
