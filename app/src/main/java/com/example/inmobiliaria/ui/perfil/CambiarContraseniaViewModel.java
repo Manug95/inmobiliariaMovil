@@ -13,6 +13,7 @@ import com.example.inmobiliaria.R;
 import com.example.inmobiliaria.modelos.CambioContrasenia;
 import com.example.inmobiliaria.request.ApiClient;
 import com.example.inmobiliaria.servicios.TokenService;
+import com.example.inmobiliaria.util.MutableSingleEvent;
 
 import java.util.Objects;
 
@@ -22,11 +23,8 @@ import retrofit2.Response;
 
 public class CambiarContraseniaViewModel extends AndroidViewModel {
     private final TokenService tokenService;
-    private final MutableLiveData<String> mErrorContraseniaActual;
-    private final MutableLiveData<String> mErrorNuevaContrasenia;
-    private final MutableLiveData<String> mErrorRepetirContrasenia;
-    private final MutableLiveData<String> mErrorCambiarContrasenia;
-    private final MutableLiveData<String> mContraseniaCambiada;
+    private final MutableLiveData<String> mErrorContraseniaActual, mErrorNuevaContrasenia, mErrorRepetirContrasenia;
+    private final MutableLiveData<MutableSingleEvent<String>> mErrorCambiarContrasenia, mContraseniaCambiada;
 
     public CambiarContraseniaViewModel(@NonNull Application application) {
         super(application);
@@ -50,11 +48,11 @@ public class CambiarContraseniaViewModel extends AndroidViewModel {
         return mErrorRepetirContrasenia;
     }
 
-    public LiveData<String> getMErrorCambiarContrasenia() {
+    public LiveData<MutableSingleEvent<String>> getMErrorCambiarContrasenia() {
         return mErrorCambiarContrasenia;
     }
 
-    public LiveData<String> getMContraseniaCambiada() {
+    public LiveData<MutableSingleEvent<String>> getMContraseniaCambiada() {
         return mContraseniaCambiada;
     }
 
@@ -67,18 +65,24 @@ public class CambiarContraseniaViewModel extends AndroidViewModel {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
-                        mContraseniaCambiada.postValue(getApplication().getString(R.string.contrasenia_actualizada));
+                        mContraseniaCambiada.postValue(new MutableSingleEvent<>(getApplication().getString(R.string.contrasenia_actualizada)));
                     } else {
-                        mErrorCambiarContrasenia.postValue(ApiClient.obtenerMensajeError(response.errorBody()));
+                        mErrorCambiarContrasenia.postValue(new MutableSingleEvent<>(ApiClient.obtenerMensajeError(response.errorBody())));
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                    mErrorCambiarContrasenia.postValue(getApplication().getString(R.string.err_al_cambiar_contrasenia));
+                    mErrorCambiarContrasenia.postValue(new MutableSingleEvent<>(getApplication().getString(R.string.err_al_cambiar_contrasenia)));
                 }
             });
         }
+    }
+
+    public void resetearMensajesError() {
+        mErrorContraseniaActual.setValue("");
+        mErrorNuevaContrasenia.setValue("");
+        mErrorRepetirContrasenia.setValue("");
     }
 
     private boolean sonClavesValidas(String calveActual, String claveNueva, String claveNuevaRepetida) {

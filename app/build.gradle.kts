@@ -34,23 +34,8 @@ android {
         )
         buildConfigField(
             "String",
-            "TOKEN",
-            "\"${localProperties.getProperty("TOKEN_SHARED_PREFERENCES", "token")}\""
-        )
-        buildConfigField(
-            "String",
             "ARCHIVO_SHARED_PREFERENCES",
             "\"${localProperties.getProperty("ARCHIVO_SHARED_PREFERENCES", "preferencia.xml")}\""
-        )
-        buildConfigField(
-            "String",
-            "USUARIO",
-            "\"${localProperties.getProperty("USUARIO", "usuario")}\""
-        )
-        buildConfigField(
-            "String",
-            "EMAIL",
-            "\"${localProperties.getProperty("EMAIL", "email")}\""
         )
         buildConfigField(
             "String",

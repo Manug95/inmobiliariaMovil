@@ -5,8 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.inmobiliaria.BuildConfig;
+import com.example.inmobiliaria.util.Constantes;
 
-public class TokenService {
+public final class TokenService {
     private static TokenService instancia;
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
@@ -24,16 +25,16 @@ public class TokenService {
     }
 
     public void guardarToken(String token) {
-        editor.putString(BuildConfig.TOKEN, "Bearer " + token);
+        editor.putString(Constantes.TOKEN, Constantes.BEARER + token);
         editor.apply();
     }
 
     public String leerToken() {
-        return sharedPreferences.getString(BuildConfig.TOKEN, null);
+        return sharedPreferences.getString(Constantes.TOKEN, null);
     }
 
     public void borrarToken(){
-        editor.remove(BuildConfig.TOKEN);
+        editor.remove(Constantes.TOKEN);
         editor.apply();
     }
 

@@ -34,6 +34,8 @@ public class PerfilFragment extends Fragment {
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
 
+        setBotonCancelarVisible(false);
+
         viewModel.getMPropietario().observe(getViewLifecycleOwner(), propietario -> {
             binding.etNombre.setText(propietario.getNombre());
             binding.etApellido.setText(propietario.getApellido());
@@ -131,22 +133,8 @@ public class PerfilFragment extends Fragment {
         dialogo.mostrarMensaje(mensaje, null, exito);
     }
 
-//    private void resetearMensajesError() {
-//        binding.tvErrorDni.setText("");
-//        binding.tvErrorNombre.setText("");
-//        binding.tvErrorApellido.setText("");
-//        binding.tvErrorTelefono.setText("");
-//        binding.tvErrorEmail.setText("");
-//    }
-
     private void setBotonCancelarVisible(boolean visible) {
         binding.btnCancelarEdicionPerfil.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
     }
-
-//    private void actualizarDatosNavHeader(DatosUsuario datosUsuario) {
-//        NavHeaderMainBinding navHeaderMainBinding = NavHeaderMainBinding.bind(findViewById(R.id.nav_view).getHeaderView(0));
-//        navHeaderMainBinding.tvHeaderUsuario.setText(datosUsuario.getNombre());
-//        navHeaderMainBinding.tvHeaderEmail.setText(datosUsuario.getEmail());
-//    }
 
 }

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.inmueble.DetalleInmuebleFragment"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:id="@+id/detalleInmueble">
+
+    <TextView
+        android:id="@+id/tvTituloDetalleInmueble"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/detalle"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvInfoDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:text="@string/direccion"
+        android:textColor="#673AB7"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvDireccion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloDetalleInmueble" />
+
+    <TextView
+        android:id="@+id/tvDireccion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:paddingEnd="5dp"
+        android:text=""
+        android:textAlignment="viewEnd"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvInfoDireccion"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloDetalleInmueble" />
+
+    <TextView
+        android:id="@+id/tvLabelTipoInmueble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:text="@string/tipo_de_inmueble"
+        android:textColor="#673AB7"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfoDireccion" />
+
+    <TextView
+        android:id="@+id/tvTipoInmueble"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:paddingEnd="5dp"
+        android:text=""
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvLabelTipoInmueble"
+        app:layout_constraintTop_toBottomOf="@+id/tvDireccion" />
+
+    <TextView
+        android:id="@+id/tvInfoUso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/uso"
+        android:layout_marginStart="5dp"
+        android:textColor="#673AB7"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvUso"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelTipoInmueble" />
+
+    <TextView
+        android:id="@+id/tvUso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:paddingEnd="5dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvInfoUso"
+        app:layout_constraintTop_toBottomOf="@+id/tvTipoInmueble" />
+
+    <TextView
+        android:id="@+id/tvInfoAmbientesI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/cant_ambientes"
+        android:layout_marginStart="5dp"
+        android:textColor="#673AB7"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvAmbientes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUso" />
+
+    <TextView
+        android:id="@+id/tvAmbientes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:paddingEnd="5dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvInfoAmbientesI"
+        app:layout_constraintTop_toBottomOf="@+id/tvUso" />
+
+    <TextView
+        android:id="@+id/tvInfoLatitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/latitud"
+        android:layout_marginStart="5dp"
+        android:textColor="#673AB7"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvLatitud"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAmbientes" />
+
+    <TextView
+        android:id="@+id/tvLatitud"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
+        android:paddingEnd="5dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvInfoLatitud"
+        app:layout_constraintTop_toBottomOf="@+id/tvAmbientes" />
+
+    <TextView
+        android:id="@+id/tvInfoLongitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/longitud"
+        android:layout_marginStart="5dp"
+        android:textColor="#673AB7"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvLongitud"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLatitud" />
+
+    <TextView
+        android:id="@+id/tvLongitud"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
+        android:paddingEnd="5dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvInfoLongitud"
+        app:layout_constraintTop_toBottomOf="@+id/tvLatitud" />
+
+    <TextView
+        android:id="@+id/tvInfoValor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/precio"
+        android:layout_marginStart="5dp"
+        android:textColor="#673AB7"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvPrecio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLongitud" />
+
+    <TextView
+        android:id="@+id/tvPrecio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
+        android:paddingEnd="5dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvInfoValor"
+        app:layout_constraintTop_toBottomOf="@+id/tvLongitud" />
+
+    <CheckBox
+        android:id="@+id/checkDisponible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/disponible"
+        android:textColor="#673AB7"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrecio" />
+
+    <ImageView
+        android:id="@+id/ivFoto"
+        android:layout_width="275dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkDisponible"
+        tools:src="@tools:sample/avatars" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

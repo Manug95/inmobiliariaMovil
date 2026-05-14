@@ -36,6 +36,8 @@
     <string name="nombre_y_apellido">Nombre y Apellido</string>
     <string name="titulo_dialog_salir">Advertencia</string>
     <string name="pregunta_dialog_salir">¿Salir de la App?</string>
+    <string name="peticion_exitosa">peticion no exitosa</string>
+    <string name="err_peticion">Error al hacer la petición al servidor</string>
 
     <!--Login-->
     <string name="txt_login">Iniciar Sesión</string>
@@ -93,5 +95,51 @@
     <string name="err_val_clave_no_coiciden">Las claves no coinciden</string>
     <string name="err_al_cambiar_contrasenia">Error al cambiar la contraseña</string>
     <string name="contrasenia_actualizada">Contraseña Actualizada</string>
+
+    <!--inmuebles-->
+    <string name="foto_del_inmueble">Foto del inmueble</string>
+    <string name="agregar_inmueble">Agregar Inmueble</string>
+    <string name="calle">Calle</string>
+    <string name="nro">Nro</string>
+    <string name="tipo_de_inmueble">Tipo de Inmueble</string>
+    <string name="uso">Uso</string>
+    <string name="cant_ambientes">Cant. ambientes</string>
+    <string name="precio">Precio</string>
+    <string name="direccion">Dirección</string>
+    <string name="latitud">Latitud</string>
+    <string name="longitud">Longitud</string>
+    <string name="disponible">Disponible</string>
+    <string name="detalle_del_inmueble">Detalle del Inmueble</string>
+    <string name="cargar_foto">Cargar Foto</string>
+    <string name="foto_del_inmueble_a_registrar">Foto del Inmueble a registrar</string>
+    <string name="direccion_del_inmueble">Dirección del Inmueble</string>
+    <string name="err_val_precio_vacio">El precio no puede estar vacío</string>
+    <string name="err_val_precio_no_positivo">El precio debe ser mayor a 0</string>
+    <string name="err_val_precio_no_es_numero">El precio debe ser un número válido</string>
+    <string name="err_val_uso_vacio">El uso no puede estar vacío</string>
+    <string name="err_val_uso_muy_largo">El uso no puede tener más de 50 caracteres</string>
+    <string name="err_val_tipo_inmueble_vacio">El tipo de inmueble no puede estar vacío</string>
+    <string name="err_val_tipo_inmueble_muy_largo">El tipo de inmueble no puede tener más de 50 caracteres</string>
+    <string name="err_val_calle_vacia">La calle no puede estar vacía</string>
+    <string name="err_val_calle_muy_larga">La calle no puede tener más de 100 caracteres</string>
+    <string name="err_val_nro_calle_vacio">El número de calle no puede estar vacío</string>
+    <string name="err_val_nro_calle_no_positivo">El número de calle debe ser mayor a 0</string>
+    <string name="err_val_nro_calle_no_es_numero">El número de calle debe ser un número válido</string>
+    <string name="err_val_latitud_vacia">La latitud no puede estar vacía</string>
+    <string name="err_val_latitud_incorrecta">La latitud debe estar entre -90 y 90</string>
+    <string name="err_val_latitud_no_es_numero">La latitud debe ser un número válido</string>
+    <string name="err_val_longitud_vacia">La longitud no puede estar vacía</string>
+    <string name="err_val_longitud_incorrecta">La longitud debe estar entre -180 y 180</string>
+    <string name="err_val_longitud_no_es_numero">La longitud debe ser un número válido</string>
+    <string name="err_val_cant_ambientes_vacia">La cantidad de ambientes no puede estar vacía</string>
+    <string name="err_val_cant_ambientes_no_positiva">La cantidad de ambientes debe ser mayor a 0</string>
+    <string name="err_val_cant_ambientes_no_es_numero">La cantidad de ambientes debe ser un número válido</string>
+    <string name="lista_inmuebles_vacia">No tiene inmuebles registrados</string>
+    <string name="err_cargar_inmuebles">Error al cargar los inmuebles</string>
+    <string name="disponibilidad_actualizada">Disponibilidad Actualizada</string>
+    <string name="err_al_actualizar_disponibilidad">Error al actualizar la disponibilidad</string>
+    <string name="err_val_foto">Debe seleccionar una foto</string>
+    <string name="err_foto">No ha seleccinado una foto</string>
+    <string name="inmueble_creado">Inmueble creado correctamente</string>
 
 </resources>

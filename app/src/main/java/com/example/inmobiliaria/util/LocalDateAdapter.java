@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class LocalDateAdapter extends TypeAdapter<LocalDate> {
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME; // Para "yyyy-MM-dd'T'HH:mm:ss"
     private static final DateTimeFormatter dateOnlyFormatter = DateTimeFormatter.ISO_LOCAL_DATE; // Para "yyyy-MM-dd"
 
     @Override

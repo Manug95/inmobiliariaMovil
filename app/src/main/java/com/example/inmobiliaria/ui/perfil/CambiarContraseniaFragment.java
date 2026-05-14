@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.inmobiliaria.databinding.FragmentCambiarContraseniaBinding;
 import com.example.inmobiliaria.util.Dialogo;
+import com.example.inmobiliaria.util.MutableSingleEvent;
 
 public class CambiarContraseniaFragment extends Fragment {
     private FragmentCambiarContraseniaBinding binding;
@@ -27,9 +28,9 @@ public class CambiarContraseniaFragment extends Fragment {
         binding = FragmentCambiarContraseniaBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(this).get(CambiarContraseniaViewModel.class);
 
-        viewModel.getMContraseniaCambiada().observe(getViewLifecycleOwner(), s -> muestraDialog(s, true));
+        viewModel.getMContraseniaCambiada().observe(getViewLifecycleOwner(), event -> mostrarMensaje(event, true));
 
-        viewModel.getMErrorCambiarContrasenia().observe(getViewLifecycleOwner(), s -> muestraDialog(s, false));
+        viewModel.getMErrorCambiarContrasenia().observe(getViewLifecycleOwner(), event -> mostrarMensaje(event, false));
 
         viewModel.getMErrorNuevaContrasenia().observe(getViewLifecycleOwner(), s -> binding.tvErrorContraseniaNueva.setText(s));
 
@@ -38,7 +39,7 @@ public class CambiarContraseniaFragment extends Fragment {
         viewModel.getMErrorRepetirContrasenia().observe(getViewLifecycleOwner(), s -> binding.tvErrorContraseniaNuevaRepetida.setText(s));
 
         binding.btnCambiarContrasenia.setOnClickListener(v -> {
-            resetearMensajesError();
+            viewModel.resetearMensajesError();
 
             String contraseniaActual = binding.etContraseniaActual.getText().toString();
             String nuevaContrasenia = binding.etNuevaContrasenia.getText().toString();
@@ -50,15 +51,16 @@ public class CambiarContraseniaFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void muestraDialog(String mensaje, boolean exito){
+    private void mostrarDialogo(String mensaje, boolean exito){
         Dialogo dialogo = new Dialogo(getContext(), getLayoutInflater());
         dialogo.mostrarMensaje(mensaje, null, exito);
     }
 
-    private void resetearMensajesError() {
-        binding.tvErrorContraseniaActual.setText("");
-        binding.tvErrorContraseniaNueva.setText("");
-        binding.tvErrorContraseniaNuevaRepetida.setText("");
+    private void mostrarMensaje(MutableSingleEvent<String> mse, boolean exito) {
+        String mensaje = mse.getContenido();
+        if (mensaje != null) {
+            mostrarDialogo(mensaje, exito);
+        }
     }
 
 }

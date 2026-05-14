@@ -10,7 +10,7 @@ import com.example.inmobiliaria.R;
 import com.example.inmobiliaria.databinding.DialogoMensajePersonalizadoBinding;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-public class Dialogo {
+public final class Dialogo {
     private final Context context;
     private final DialogoMensajePersonalizadoBinding dialogoBinding;
     @ColorInt
@@ -31,7 +31,7 @@ public class Dialogo {
     }
 
     public void mostrarMensaje(int mensaje, DialogInterface.OnClickListener listener, boolean exito) {
-        dialogoBinding.tvMensajeDialog.setText(mensaje);
+        dialogoBinding.tvMensajeDialog.setText(context.getString(mensaje));
         dialogoMensaje(listener, exito);
     }
 
@@ -41,7 +41,7 @@ public class Dialogo {
     }
 
     public void mostrarPregunta(int pregunta, DialogInterface.OnClickListener listenerSi, DialogInterface.OnClickListener listenerNo){
-        dialogoBinding.tvMensajeDialog.setText(pregunta);
+        dialogoBinding.tvMensajeDialog.setText(context.getString(pregunta));
         dialogoPregunta(listenerSi, listenerNo);
     }
 

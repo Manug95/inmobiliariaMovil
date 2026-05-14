@@ -10,5 +10,6 @@ public enum TipoErrorValidacion {
     VALOR_NO_POSITIVO,
     NO_ES_NUMERO,
     LONGITUD_MAXIMA,
-    LONGITUD_MINIMA
+    LONGITUD_MINIMA,
+    RANGO_INCORRECTO
 }

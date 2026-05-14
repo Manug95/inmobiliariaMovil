@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.inmobiliaria.util.Constantes;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,7 +39,7 @@ public class HomeViewModel extends AndroidViewModel {
         public void onMapReady(@NonNull GoogleMap googleMap) {
             MarkerOptions marcadorInmobiliaria = new MarkerOptions();
             marcadorInmobiliaria.position(inmobiliaria);
-            marcadorInmobiliaria.title("San Luis");
+            marcadorInmobiliaria.title(Constantes.INMOBILIARIA);
 
             googleMap.addMarker(marcadorInmobiliaria);
             googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
